@@ -11,7 +11,6 @@ from mnistload import Batch
 # MNIST Dataset problem
 # Deep Neural Network
 #
-# Author: Jacob Giczi 
 # Version: 10-20-2020
 #-----------------------#
 
