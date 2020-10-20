@@ -27,6 +27,8 @@
  rename them so that the dot after 'images' 
  or 'labels' becomes a dash
 
+ just put the data in a folder and update the 
+ directory in 'mnistload.py'
 
  you also need to install a few python modules
 
