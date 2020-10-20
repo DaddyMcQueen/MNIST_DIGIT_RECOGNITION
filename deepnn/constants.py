@@ -1,0 +1,17 @@
+#Learning variables
+BATCH_SIZE = 100
+NUM_BATCHES = 600
+EPOCHS = 10
+
+#Data processing variables
+IMAGE_SIZE = 28
+PIXELS = IMAGE_SIZE * IMAGE_SIZE
+LABLES_COUNT = 10
+DATA_PATH = "data/mnist"
+WEIGHT_MULTIPLIER = 0.2
+LEARNING_RATE = 0.1
+
+#Neural network size
+SIZE_IN = PIXELS
+SIZE_HIDDEN = 64
+SIZE_OUT = LABLES_COUNT
