@@ -66,17 +66,15 @@ class DeepNN:
 		return 1/(1+np.exp(-x))
 
 	def d_sigmoid(self, x):
-		return self.sigmoid(x) * (1 - self.sigmoid(x))
+		return x * (1 - x)
 
 	#preform forward pass through NN self.layer_out is 1 by 10 array 0 <= values <= 1
 	def forward_pass(self, inputs):
 		inputs = np.asarray(inputs) 
+
 		self.layer_0  = inputs.reshape(1, 784)
-
 		self.layer_h1 = self.sigmoid(np.dot(self.layer_0, self.w_in_hidden1) + self.bias_h1)
-
 		self.layer_h2 = self.sigmoid(np.dot(self.layer_h1, self.w_hidden1_hidden2) + self.bias_h2)
-
 		self.layer_out = self.sigmoid(np.dot(self.layer_h2, self.w_hidden2_out) + self.bias_out)
 
 		return self.layer_out
@@ -89,7 +87,6 @@ class DeepNN:
 	#proform back prop based on costs
 	#"I just kept adding more lin alg untill it worked" - Jacob Giczi
 	def back_prop(self):
-
 		self.w_hidden2_out_delta += (self.output_costs * self.layer_h2).T * self.d_sigmoid(self.layer_out)  
 		self.bias_out_delta += (self.d_sigmoid(self.layer_out) * self.output_costs.T)
 
@@ -98,7 +95,6 @@ class DeepNN:
 		
 		self.w_hidden1_hidden2_delta += (w_hidden2_costs * self.layer_h1).T * self.d_sigmoid(self.layer_h2)
 		self.bias_h2_delta += (self.d_sigmoid(self.layer_h2) * w_hidden2_costs.T)
-
 
 		w_hidden1_costs = (self.w_hidden1_hidden2 * w_hidden2_costs) * self.d_sigmoid(self.layer_h2)
 		w_hidden1_costs = np.sum(w_hidden1_costs, axis=1)
@@ -133,3 +129,20 @@ class DeepNN:
 			self.back_prop()
 
 		self.update_w_b()
+
+	def test_network(self, inputs, labels):
+		correct = 0
+		for i in range(BATCH_SIZE):
+			outputs = self.forward_pass(inputs[i]).T
+			print(outputs)
+			print(labels[i])
+			guess_val = outputs[0]
+			guess = 0
+			for j in range(10):
+				if outputs[j] > guess_val:
+					guess_val = outputs[j]
+					guess = j
+			print(guess)
+			if guess == labels[i]:
+				correct += 1
+		return correct / BATCH_SIZE
