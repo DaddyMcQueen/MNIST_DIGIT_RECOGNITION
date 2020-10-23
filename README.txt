@@ -2,20 +2,15 @@
  MNIST Hand Written Digits Dataset problem
  
  This is a deep neural network that can be
- trained to sometimes recognize the 
- handwritten digits from the MNIST dataset.
+ trained to recognize the handwritten digits 
+ from the MNIST dataset with a ~90% accuracy
 
- It is still stupid and needs the following:
- - export/ import weights and biases
- - randomize order of training data to allow
-   for epochs 
- - add function to nn for testing
- - add statistics after test
+ It still needs the following:
  - add graphics / ease of use
  - add input for user to draw digit and
    have network predict it
 
- Version: 10-20-2020
+ Version: 10-23-2020
 #--------------------------------------------#
 
 
@@ -34,9 +29,5 @@
 
  - numpy 
  - mnist
-
- pip commands:
- pip install numpy
- pip install python-mnist
-
+ - pickel
 #--------------------------------------------#
