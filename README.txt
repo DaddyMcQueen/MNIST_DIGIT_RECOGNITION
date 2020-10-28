@@ -3,12 +3,22 @@
  
  This is a deep neural network that can be
  trained to recognize the handwritten digits 
- from the MNIST dataset with a ~90% accuracy
+ from the MNIST dataset 
+ 
+ Tncluded is a pickel that can be imported 
+ and will recognize the testing data with
+ a 94.45% accuracy. It is a nn with 2
+ hidden layers of 16 neurons that was trianed 
+ for 3000 epochs. During this training it 
+ peaked at 95.4% accuracy at ~1700 epochs
+ 
 
  It still needs the following:
- - add graphics / ease of use
- - add input for user to draw digit and
-   have network predict it
+ - fix drawing nn for user input
+   - the nn has a very low accuracy 
+     on user input data -likely
+     because the nn relies on the 
+     low values to recognize edges
 
  Version: 10-23-2020
 #--------------------------------------------#
