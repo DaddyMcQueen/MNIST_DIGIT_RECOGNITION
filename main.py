@@ -15,12 +15,13 @@ from deepnn.constants import EPOCHS
 # MNIST Dataset problem
 # Deep Neural Network
 #
-# Version: 10-28-2020
+# Version: 11-03-2020
 #-----------------------#
 def main():
 	new_network = False
-	test_network = True
-	predict_drawing = False
+	test_network = False
+	predict_drawing = True
+	continue_training = False
 	
 	if new_network:
 		mnist_network = DeepNN(SIZE_IN, SIZE_OUT, SIZE_HIDDEN, LEARNING_RATE)
@@ -28,7 +29,10 @@ def main():
 	else:
 		pickel_in = open("nn.pickel", "rb")
 		mnist_network = pickle.load(pickel_in)
-		train_network = False
+		if continue_training == False:
+			train_network = False
+		else:
+			train_network = True
 
 	while predict_drawing:
 		drawing, run = get_drawing()
@@ -36,6 +40,7 @@ def main():
 			predict_drawing = False
 			break
 		outputs = mnist_network.forward_pass(drawing).T
+		print(outputs)
 		prediction_val = outputs[0]
 		prediction = 0
 		for j in range(9):
