@@ -6,7 +6,7 @@ from deepnn.constants import WIN_WIDTH
 from deepnn.constants import WIN_HEIGHT
 from deepnn.constants import WHITE
 from deepnn.constants import BLACK
-from deepnn.constants import GRAY
+
 
 pygame.font.init()
 FONT = pygame.font.SysFont("comicsans", 50)
@@ -21,40 +21,14 @@ class Drawing(object):
 
 	def update_grid(self, row, col):
 		if row < 28 and col < 28:
-			self.grid[row][col] = 1
-			if row > 0 and col > 0:
+			self.grid[row][col] += 0.3
 
-				if self.grid[row - 1][col] >= 1:
-					pass
-				else: 
-					self.grid[row - 1][col] += 0.1
-
-				if self.grid[row][col - 1] >= 1:
-					pass
-				else: 
-					self.grid[row][col - 1] += 0.1
-
-				if self.grid[row - 1][col - 1] == 1:
-					pass
-				else: 
-					self.grid[row - 1][col - 1] += 0.1
-
-			if row < 27 and col < 27:
-
-				if self.grid[row + 1][col] >= 1:
-					pass
-				else: 
-					self.grid[row + 1][col] += 0.1
-
-				if self.grid[row][col + 1] >= 1:
-					pass
-				else: 
-					self.grid[row][col + 1] += 0.1
-
-				if self.grid[row + 1][col + 1] == 1:
-					pass
-				else: 
-					self.grid[row + 1][col + 1] += 0.1
+			for i in range(-1, 2):
+				for j in range(-1, 2):
+					if (row + i) > 27 or (col + j) > 27 or (row + i) < 0 or (col + j) < 0:
+						break
+					else:
+						self.grid[row + i][col + j] += 0.05
 		else:
 			return True
 
@@ -67,10 +41,9 @@ class Drawing(object):
 			for col in range(28):
 				if self.grid[row][col] >= 1:
 					self.grid[row][col] = 1
-				if self.grid[row][col] == 1:
-					pygame.draw.rect(win, BLACK, [col * 20, row * 20, 20, 20])
-				if self.grid[row][col] == 0.5:
-					pygame.draw.rect(win, GRAY, [col * 20, row * 20, 20, 20])
+
+				col_val = 255 - self.grid[row][col] * 255
+				pygame.draw.rect(win, (col_val, col_val, col_val), [col * 20, row * 20, 20, 20])
 		
 def click_to_grid(mx, my):
 	row = math.floor(my / 20)
@@ -117,7 +90,7 @@ def get_drawing():
 	return out, testing
 
 						
-# def main():
-# 	output = get_drawing()
+def main():
+	output = get_drawing()
 
-# main()
+main()
